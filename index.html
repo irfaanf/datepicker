@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datepicker</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: #0B1215;
+            background-color: #F8F8FF;
+        }
+
+        .container {
+            margin-bottom: 2rem;
+        }
+
+        .datepicker-container {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        input:invalid+.valid-date::after {
+            color: red;
+            content: "✖";
+        }
+
+        input:valid+.valid-date::after {
+            color: green;
+            content: "✓";
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Datepicker</h1>
+
+    <div class="container datepicker-container">
+        <label for="departure">Departure date</label>
+        <div>
+            <input type="date" id="departure" min="2020-01-01" max="2024-08-31" value="2024-04-19" />
+            <span class="valid-date"></span>
+        </div>
+
+        <button id="select-date-button">Select Date</button>
+    </div>
+    
+    <div class="container">
+        <p>    
+            Selected Day: <span id="day"></span>
+        </p>
+        <p>
+            Selected Month: <span id="month"></span>
+        </p>
+        <p>
+            Selected Year: <span id="year"></span>
+        </p>
+    </div>
+
+    <script>
+        window.onload = function() { document.getElementById('select-date-button').addEventListener('click', onSelectDate); }
+
+        const onSelectDate = () => {
+            const departureDatepicker = document.getElementById("departure");
+            const date = new Date(departureDatepicker.value);
+
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+
+            document.getElementById('day').innerHTML = day;
+            document.getElementById('month').innerHTML = month;
+            document.getElementById('year').innerHTML = year;
+        }
+        
+
+    </script>
+</body>
+
+</html>
